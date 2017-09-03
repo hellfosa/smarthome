@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+
+    <title>Blank test page</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{% static 'bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="{% static 'bower_components/toast-master/css/jquery.toast.css' %}" rel="stylesheet">
+    <!-- morris CSS -->
+    <link href="{% static 'bower_components/morrisjs/morris.css' %}" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="../static/css/colors/blue-dark.css" id="theme" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Blank Page </h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="http://wrappixel.com/templates/pixeladmin/" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Blank Page</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Master Bedroom Temperature</h3>
+                            <ul class="list-inline text-right">
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #b5545a;"></i>Temperature</h5>
+                                </li>
+                            </ul>
+                            <div id="master_bedroom_temp" style="height: 370px;"></div>
+                        </div>
+                        <div class="white-box">
+                            <h3 class="box-title">Master Bedroom Humidity</h3>
+                            <ul class="list-inline text-right">
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #60b55b;"></i>Humidity</h5>
+                                </li>
+                            </ul>
+                            <div id="master_bedroom_humi" style="height: 370px;"></div>
+                        </div>
+			<div class="white-box">
+                            <h3 class="box-title">Master Bedroom CO2</h3>
+                            <ul class="list-inline text-right">
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #60b55b;"></i>CO2</h5>
+                                </li>
+                            </ul>
+                            <div id="master_bedroom_co2" style="height: 370px;"></div>
+                        </div>
+			<div class="white-box">
+                            <h3 class="box-title">Master Bedroom Pressure</h3>
+                            <ul class="list-inline text-right">
+                                <li>
+                                    <h5><i class="fa fa-circle m-r-5" style="color: #60b55b;"></i>Pressure</h5>
+                                </li>
+                            </ul>
+                            <div id="master_bedroom_pres" style="height: 370px;"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Pixel Admin brought to you by wrappixel.com </footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'bower_components/sidebar-nav/dist/sidebar-nav.min.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="../static/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="../static/js/waves.js"></script>
+
+    <!--Morris JavaScript -->
+    <script src="{% static 'bower_components/raphael/raphael-min.js' %}"></script>
+    <script src="{% static 'bower_components/morrisjs/morris.js' %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../static/js/custom.min.js"></script>
+    <script src="../static/js/dashboard1.js"></script>
+
+    <script>
+    Morris.Area({
+    element: 'master_bedroom_temp',
+    data: [
+        {% for data in master_temp %}
+        { period: '{{ data.published|date:"Y-m-d H:i" }}', Temperature: {{ data.signal }} },
+        {% endfor %}
+       ],
+    xkey: 'period',
+    ykeys: ['Temperature'],
+    labels: ['Temperature'],
+    resize: true,
+    pointSize: 0,
+    fillOpacity: 0.9,
+    behaveLikeLine: true,
+    lineWidth: 0,
+    hideHover: 'auto',
+    lineColors: ['#b5545a']
+    });
+
+    </script>
+
+    <script>
+    Morris.Area({
+    element: 'master_bedroom_humi',
+    data: [
+        {% for data in master_humi %}
+        { period: '{{ data.published|date:"Y-m-d H:i" }}', Humidity: {{ data.signal }} },
+        {% endfor %}
+       ],
+    xkey: 'period',
+    ykeys: ['Humidity'],
+    labels: ['Humidity'],
+    resize: true,
+    pointSize: 0,
+    fillOpacity: 0.9,
+    behaveLikeLine: true,
+    lineWidth: 0,
+    hideHover: 'auto',
+    lineColors: ['#60b55b']
+    });
+    </script>
+
+    <script>
+    Morris.Area({
+    element: 'master_bedroom_co2',
+    data: [
+        {% for data in master_co2 %}
+        { period: '{{ data.published|date:"Y-m-d H:i" }}', CO2: {{ data.signal }} },
+        {% endfor %}
+       ],
+    xkey: 'period',
+    ykeys: ['CO2'],
+    labels: ['CO2'],
+    resize: true,
+    pointSize: 0,
+    fillOpacity: 0.9,
+    behaveLikeLine: true,
+    lineWidth: 0,
+    hideHover: 'auto',
+    lineColors: ['#d77d31']
+    });
+    </script>
+
+    <script>
+    Morris.Area({
+    element: 'master_bedroom_pres',
+    data: [
+        {% for data in master_pres %}
+        { period: '{{ data.published|date:"Y-m-d H:i" }}', Pressure: {{ data.signal }} },
+        {% endfor %}
+       ],
+    xkey: 'period',
+    ykeys: ['Pressure'],
+    labels: ['Pressure'],
+    resize: true,
+    pointSize: 0,
+    fillOpacity: 0.9,
+    behaveLikeLine: true,
+    lineWidth: 0,
+    hideHover: 'auto',
+    lineColors: ['#42aaff']
+    });
+    </script>
+
+{% endblock %}

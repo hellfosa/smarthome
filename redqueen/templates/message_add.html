@@ -1,0 +1,83 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Message diags page</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{% static "bower_components/sidebar-nav/dist/sidebar-nav.min.css"%}" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="{% static "css/colors/blue-dark.css" %}" id="theme" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+      <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Message page</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/">Dashboard</a></li>
+                            <li class="active">Message page</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- .row -->
+                <div class="row">
+                    <div class="col-md-8 col-xs-12">
+                        <div class="white-box">
+                            <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="Channel">Channel</label>
+                                    <div class="col-md-12">
+                                        <input id="Channel" type="text" name="Channel" placeholder="channel please" class="form-control" required> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="Signal">Signal</label>
+                                    <div class="col-md-12">
+                                        <input id="Signal" type="text" name="Signal" placeholder="signal please" class="form-control" required> </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="submit" name="_submit" class="btn btn-success">Create Message</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Pixel Admin brought to you by wrappixel.com </footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+{% endblock %}
+
+{% block js %}
+    <!-- jQuery -->
+    <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static "bower_components/sidebar-nav/dist/sidebar-nav.min.js" %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static "js/jquery.slimscroll.js" %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static "js/waves.js" %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static "js/custom.min.js" %}"></script>
+{% endblock %}

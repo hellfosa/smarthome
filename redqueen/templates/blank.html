@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+
+    <title>Blank test page</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{% static 'bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet}">
+    <!-- Animation CSS -->
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet}">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/colors/blue-dark.css' %}" id="theme" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Blank Page </h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="http://wrappixel.com/templates/pixeladmin/" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Dashboard</a></li>
+                            <li class="active">Blank Page</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Pixel Admin brought to you by wrappixel.com </footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+{% endblock %}
+
+{% block js %}
+    <!-- jQuery -->
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src=".{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'bower_components/sidebar-nav/dist/sidebar-nav.min.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <title>Devices list</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{% static 'bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="{% static 'css/colors/blue-dark.css' %}" id="theme" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Device Table</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"><a href="/device_add" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Add new device</a>
+                        <ol class="breadcrumb">
+                            <li><a href="/">Dashboard</a></li>
+                            <li class="active">Device Table</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Device Table</h3>
+                            <p class="text-muted">Add new device here</p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Device Name</th>
+                                            <th>Group</th>
+                                            <th>MQTT-channel</th>
+                                            <th>Action</th>
+                                            <th>Current Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for device in devices %}
+                                        <tr>
+                                            <td>{{ device.pk }}</td>
+                                            <td><a href="{% url 'Device' pk=device.pk %}">{{ device.name }}</a></td>
+                                            <td>{{ device.group }}</td>
+                                            <td>{{ device.channel }}</td>
+                                            <td>{{ device.action }}</td>
+                                            <td>{{ device.value }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'bower_components/sidebar-nav/dist/sidebar-nav.min.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <title>Rules list</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{% static 'bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="{% static 'css/colors/blue-dark.css' %}" id="theme" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Rule Table</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"><a href="/rule_add" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Add new rule</a>
+                        <ol class="breadcrumb">
+                            <li><a href="/">Dashboard</a></li>
+                            <li class="active">Rule Table</li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">Rule Table</h3>
+                            <p class="text-muted">Add new rule here</p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Rule Name</th>
+                                            <th>Group</th>
+                                            <th>Action</th>
+                                            <th>Rule starts</th>
+                                            <th>Rule ends</th>
+                                            <th>Repeat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for rule in rules %}
+                                        <tr>
+                                            <td>{{ rule.pk }}</td>
+                                            <td><a href="{% url 'Rule' pk=rule.pk %}">{{ rule.name }}</a></td>
+                                            <td>{{ rule.group }}</td>
+                                            <td>{{ rule.action }}</td>
+                                            <td>{{ rule.start_at }}</td>
+                                            <td>{{ rule.end_at }}</td>
+                                            <td>{{ rule.repeat }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static 'bower_components/sidebar-nav/dist/sidebar-nav.min.js' %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static 'js/jquery.slimscroll.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+{% endblock %}

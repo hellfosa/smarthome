@@ -1,0 +1,121 @@
+{% include 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Profile settings page</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static "bootstrap/dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{% static "bower_components/sidebar-nav/dist/sidebar-nav.min.css"%}" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="{% static "css/animate.css" %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="{% static "css/colors/blue-dark.css" %}" id="theme" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+      <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Profile page</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/">Dashboard</a></li>
+                            <li class="active">Profile page</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- .row -->
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <div class="white-box">
+                            <div class="user-bg"> <img width="100%" alt="user" src="{{ MEDIA_URL }}{{ human.photo.url }}">
+                                <div class="overlay-box">
+                                    <div class="user-content">
+                                        <a href="javascript:void(0)"><img src="{{ MEDIA_URL }}{{ human.photo.url }}" class="thumb-lg img-circle" alt="img"></a>
+                                        <h4 class="text-white">{{ human.name }}</h4>
+                                        <h5 class="text-white">{{ human.role }}</h5> </div>
+                                </div>
+                            </div>
+                            <div class="user-btm-box">
+                                <div class="col-md-4 col-sm-4 text-center">
+                                    <p class="text-purple"><i class="ti-facebook"></i></p>
+                                    <h1>258</h1> </div>
+                                <div class="col-md-4 col-sm-4 text-center">
+                                    <p class="text-blue"><i class="ti-twitter"></i></p>
+                                    <h1>125</h1> </div>
+                                <div class="col-md-4 col-sm-4 text-center">
+                                    <p class="text-danger"><i class="ti-dribbble"></i></p>
+                                    <h1>556</h1> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-xs-12">
+                        <div class="white-box">
+                            <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label class="col-md-12" for="Name">Name</label>
+                                    <div class="col-md-12">
+                                        <input id="Name" type="text" name="Name" value="{{ human.name }}" class="form-control" required> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="Sex">Sex</label>
+                                    <div class="col-md-12">
+                                        <input id="Sex" type="text" name="Sex" value="{{ human.sex }}" class="form-control" required> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="Role">Role</label>
+                                    <div class="col-md-12">
+                                        <input id="Role" type="text" name="Role" value="{{ human.role }}" class="form-control" required> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="Phone">Phone</label>
+                                    <div class="col-md-12">
+                                        <input id="Phone" type="text" name="Phone" value="{{ human.phone }}" class="form-control" required> </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="Photo">Photo</label>
+                                    <div class="col-md-12">
+                                        <input id="Photo" type="file" name="Photo" class="form-control"> </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="submit" name="_submit" class="btn btn-success">Update human</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Pixel Admin brought to you by wrappixel.com </footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+{% endblock %}
+
+{% block js %}
+    <!-- jQuery -->
+    <script src="{% static "bower_components/jquery/dist/jquery.min.js" %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="{% static "bower_components/sidebar-nav/dist/sidebar-nav.min.js" %}"></script>
+    <!--slimscroll JavaScript -->
+    <script src="{% static "js/jquery.slimscroll.js" %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static "js/waves.js" %}"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static "js/custom.min.js" %}"></script>
+{% endblock %}
