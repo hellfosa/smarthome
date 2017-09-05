@@ -231,10 +231,9 @@ def sensors(request):
 def graphs(request):
     if request.is_ajax():
         q = request.GET.get('query')
-        if q is not None and request.GET.get('data') == 'day' and request.GET.get('sensor') == 'temp':
-            queryset = Message.objects.filter(channel='/climate/master_bedroom/temperature').order_by('-published')[:800]
-            r = [{"signal": item.signal, "published": item.published} for item in queryset]
-            data = {"query": "day temp", 'data': r}
+        if q is not None and request.GET.get('range') == 'day' and request.GET.get('room') == 'master_bedroom':
+            queryset = Message.objects.filter(channel__icontains='/climate/master_bedroom/').order_by('-published')[:800]
+            data = [{"channel": item.channel, "signal": item.signal, "published": item.published.isoformat()} for item in queryset]
             return HttpResponse(json.dumps(data), 'application/javascript')
     else:
         raise Http404("Page for AJAX only")

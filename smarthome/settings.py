@@ -25,7 +25,7 @@ SECRET_KEY = 'i$382a1ybabtowp&0*^ec+4w06ca)cw1jf+9z@%=5d1t5ad#p@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sm.test.lan']
+ALLOWED_HOSTS = ['sm.test.lan', '127.0.0.1']
 
 
 # Application definition
@@ -79,15 +79,12 @@ WSGI_APPLICATION = 'smarthome.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-  'default': {
-  'ENGINE': 'django.db.backends.postgresql_psycopg2',
-  'NAME': 'smarthomedb',
-  'USER': 'smarthomeuser',
-  'PASSWORD': 'passwashere',
-  'HOST': '172.16.0.6',
-  'PORT': '5432',
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
