@@ -7,14 +7,13 @@
           $.getJSON("/graphs", {'query': 'iwantgraphs', 'range': 'day', 'room': 'master_bedroom'}, function (results) {
               $.each(results, function (json, element) {
                     if (element.channel == "/climate/master_bedroom/temperature") {
-                        temp.push(element.signal);
+                        temp.push({'x': element.published, 'y': element.signal});
                     } else if (element.channel == "/climate/master_bedroom/humidity") {
-                        humi.push(element.signal);
+                        humi.push({'x': element.published, 'y': element.signal});
                     }
-                    period.push(element.published);
-
               });
-
+              console.log(temp);
+              console.log(humi);
           datasets = [{
                     data: temp,
                     label: "Temperature",
@@ -27,16 +26,15 @@
                     fill: false
                   }
                 ];
-          myChart.data.labels = period;
           myChart.data.datasets = datasets;
           myChart.update();
          });
 
 
             var myChart = new Chart(ctx, {
-              type: 'line',
+              type: 'scatter',
+              labels: 0,
               data: {
-                labels: 0,
                 datasets: [{
                     data: 0,
                     label: "Temperature",
@@ -54,7 +52,16 @@
                 title: {
                   display: true,
                   text: 'Climate stats in master bedroom'
+                },
+                scales: {
+                    xAxes: [{
+                        type: 'time',
+                        time: {
+                            format: 'HH:mm:ss'
+                            }
+                    }]
                 }
+
               }
             });
           });

@@ -1,5 +1,7 @@
 from django.db import models
-from django.utils import timezone
+#from django.utils import timezone
+from pytz import timezone
+
 
 
 # Create your models here.
@@ -16,7 +18,7 @@ class Human(models.Model):
 class Message (models.Model):
     channel = models.CharField(max_length=200, default='System\Diags')
     signal = models.TextField()
-    published = models.DateTimeField(default=timezone.now, null=True)
+    published = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return '{0} - {1} - {2}'.format(self.channel, self.signal, self.published)
@@ -35,8 +37,8 @@ class Rule(models.Model):
     name = models.CharField(max_length=200, default='untitled')
     group = models.CharField(max_length=200, default='System')
     action = models.CharField(max_length=200, default='None')
-    start_at = models.DateTimeField(default=timezone.now)
-    end_at = models.DateTimeField(default=timezone.now)
+    start_at = models.DateTimeField(auto_now=True)
+    end_at = models.DateTimeField(auto_now=True)
     repeat = models.CharField(max_length=200, default='no')
 
     def __str__(self):
