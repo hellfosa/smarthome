@@ -232,7 +232,7 @@ def graphs(request):
     if request.is_ajax():
         q = request.GET.get('query')
         if q is not None and request.GET.get('range') == 'day' and request.GET.get('room') == 'master_bedroom':
-            queryset = Message.objects.filter(channel__icontains='/climate/master_bedroom/').order_by('published')[:800]
+            queryset = Message.objects.filter(channel__icontains='/climate/master_bedroom/').order_by('published')[:100]
             data = [{"channel": item.channel, "signal": item.signal, "published": item.published.strftime("%H:%M:%S")} for item in queryset]
             print(data)
             return HttpResponse(json.dumps(data), 'application/javascript')
