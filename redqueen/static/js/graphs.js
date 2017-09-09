@@ -5,18 +5,23 @@
           temp = [];
           humi = [];
           co2 = [];
+          pressure = [];
           $.getJSON("/graphs", {'query': 'iwantgraphs', 'range': 'day', 'room': 'master_bedroom'}, function (results) {
               $.each(results, function (json, element) {
                     if (element.channel == "/climate/master_bedroom/temperature") {
                         temp.push({'x': element.published, 'y': element.signal});
                     } else if (element.channel == "/climate/master_bedroom/humidity") {
                         humi.push({'x': element.published, 'y': element.signal});
-                    }else if (element.channel == "/climate/master_bedroom/CO2") {
+                    } else if (element.channel == "/climate/master_bedroom/CO2") {
                         co2.push({'x': element.published, 'y': element.signal});
+                    } else if (element.channel == "/climate/master_bedroom/pressure") {
+                        pressure.push({'x': element.published, 'y': element.signal});
                     }
               });
               console.log(temp);
               console.log(humi);
+              console.log(co2);
+              console.log(pressure);
           datasets = [{
                     data: temp,
                     label: "Temperature",
@@ -31,6 +36,11 @@
                     data: co2,
                     label: "Carbon Dioxide",
                     borderColor: "#2dc41a",
+                    fill: false
+                  }, {
+                    data: pressure,
+                    label: "Athmosphere pressure",
+                    borderColor: "#FFFF00",
                     fill: false
                   }
                 ];
@@ -58,6 +68,11 @@
                     label: "Carbon Dioxide",
                     borderColor: "#2dc41a",
                     fill: false
+                  }, {
+                    data: 0,
+                    label: "Athmosphere pressure",
+                    borderColor: "#FFFF00",
+                    fill: false
                   }
                 ]
               },
@@ -70,7 +85,7 @@
                     xAxes: [{
                         type: 'time',
                         time: {
-                            format: 'HH:mm:ss'
+                            format: 'DD MM HH:mm:ss'
                             }
                     }]
                 }

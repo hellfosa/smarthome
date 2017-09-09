@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from .models import Human, Device, Message, Rule
 from .forms import MessageForm, RuleForm, DeviceForm, HumanForm
+from datetime import datetime, timedelta
 import json
 
 @login_required
@@ -217,14 +218,16 @@ def message_add(request):
 def messages(request):
     if request.method == 'GET':
         messages = Message.objects.all().order_by('-pk')[:100]
+        #Message.objects.all().delete()
         return render(request, 'messages.html', {'messages': messages})
 
 @login_required
 def sensors(request):
-    master_temp = Message.objects.filter(channel='/climate/master_bedroom/temperature').order_by('-published')[:800]
-    master_humi = Message.objects.filter(channel='/climate/master_bedroom/humidity').order_by('-published')[:800]
-    master_co2 = Message.objects.filter(channel='/climate/master_bedroom/CO2').order_by('-published')[:800]
-    master_pres = Message.objects.filter(channel='/climate/master_bedroom/pressure').order_by('-published')[:800]
+    time_threshold = datetime.now() - timedelta(hours=24)
+    master_temp = Message.objects.filter(channel='/climate/master_bedroom/temperature', published__gt=time_threshold).order_by('-published')
+    master_humi = Message.objects.filter(channel='/climate/master_bedroom/humidity', published__gt=time_threshold).order_by('-published')
+    master_co2 = Message.objects.filter(channel='/climate/master_bedroom/CO2', published__gt=time_threshold).order_by('-published')
+    master_pres = Message.objects.filter(channel='/climate/master_bedroom/pressure', published__gt=time_threshold).order_by('-published')
     return render(request, 'sensors.html', {'master_temp': master_temp, 'master_humi': master_humi, 'master_co2': master_co2, 'master_pres': master_pres})
 
 @login_required
@@ -232,9 +235,9 @@ def graphs(request):
     if request.is_ajax():
         q = request.GET.get('query')
         if q is not None and request.GET.get('range') == 'day' and request.GET.get('room') == 'master_bedroom':
-            queryset = Message.objects.filter(channel__icontains='/climate/master_bedroom/').order_by('published')[:100]
-            data = [{"channel": item.channel, "signal": item.signal, "published": item.published.strftime("%H:%M:%S")} for item in queryset]
-            print(data)
+            time_threshold = datetime.now() - timedelta(hours=24)
+            queryset = Message.objects.filter(channel__icontains='/climate/master_bedroom/', published__gt=time_threshold).order_by('published')
+            data = [{"channel": item.channel, "signal": item.signal, "published": item.published.strftime("%d %m %H:%M:%S")} for item in queryset]
             return HttpResponse(json.dumps(data), 'application/javascript')
     else:
         raise Http404("Page for AJAX only")
